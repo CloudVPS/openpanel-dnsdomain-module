@@ -1,0 +1,36 @@
+<xml.schema>
+
+	<xml.class name="openpanel.module.domain">
+		<xml.type>dict</xml.type>
+		<xml.proplist>
+			<xml.member class="config"	id="config"/>
+		</xml.proplist>
+	</xml.class>
+
+	<xml.class name="config">
+		<xml.type>dict</xml.type>
+		<xml.proplist>
+			<xml.member class="varpath" 	id="varpath"/>
+			<xml.member class="zonepath" 	id="zonepath"/>
+			<xml.member class="zoneconffile" id="zoneconffile"/>
+			<xml.member class="servicename"	 id="servicename"/>
+		</xml.proplist>
+	</xml.class>
+
+	<xml.class name="varpath">
+		<xml.type>string</xml.type>
+	</xml.class>
+	
+	<xml.class name="servicename">
+		<xml.type>string</xml.type>
+	</xml.class>
+	
+	<xml.class name="zoneconffile">
+		<xml.type>string</xml.type>
+	</xml.class>
+	
+	<xml.class name="zonepath">
+		<xml.type>string</xml.type>
+	</xml.class>
+	
+</xml.schema>

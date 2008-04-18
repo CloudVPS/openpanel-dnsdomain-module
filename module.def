@@ -1,0 +1,283 @@
+# ============================================================================
+# OpenPanel DNSDomain.module for bind9 based DNS hosting
+# Copyright (C) 2008 PanelSix V.O.F.
+# ============================================================================
+module DNSDomain			< uuid 0fd76730-82bf-4f50-9e1a-a256c00a1d87
+							< version 1
+							< languages en_EN
+							< requires Domain.module
+							< apitype xml
+							< getconfig true
+
+# ============================================================================
+# DOMAIN CLASSES
+# ============================================================================
+class Meta:DNSDomain        < uuid 17302eb3-bee7-4827-b0c6-4812d45b8c4d
+							< version 1
+							< requires Domain
+							< indexing manual
+							< parentrealm domainsuffix
+							< shortname dnsdomain
+							< title DNS
+                            < description DNS zone
+                            < sortindex 30
+
+							< metatype base
+
+	string id				: Domain name < gridwidth 40
+	string type				: Type < gridwidth 15
+	string description		: Description < gridwidth 43
+
+
+# ----------------------------------------------------------------------------
+class DNSDomain:Master 		< uuid 4629fca4-5672-4273-bc92-b9ad863c9028
+							< version 1
+							< requires Domain
+							< indexing manual
+							< uniquein class
+							< parentrealm domainsuffix
+							< allchildren true
+							< shortname masterdomain
+							< title DNS Master
+							< description DNS Master zone
+							< explanation masterdomain.html
+							< magicdelimiter $
+							< prototype prototype
+							
+							< capabilities create delete update
+							< required ttl
+							
+							< metatype derived
+							< metabase Meta:DNSDomain
+							< metadescription Primary TTL=$ttl$
+							
+	string id 				: Domain name
+							< example foobar.com
+							
+	string primaryns 		: Primary nameserver
+							< regexp [:hostname:]
+							< example ns1.foobar.com
+							
+	enum ttl 				: Time to Live
+							< regexp [:numbers:]
+							< example 3600
+							< default 3600
+	
+	integer refresh			: Refresh time
+							< regexp [:numbers:]
+							< default 16384
+							
+	integer retry			: Retry time
+							< regexp [:numbers:]
+							< default 2048
+							
+	integer expire 			: Expiration time
+							< regexp [:numbers:]
+							< default 1048576
+							
+	integer minimum			: Minimum
+							< regexp [:numbers:]
+							< default 2560
+
+
+# ----------------------------------------------------------------------------
+class DNSDomain:Slave		< uuid cb7272f4-5fdb-4ec9-9cb2-ca30b925c381
+							< version 1
+							< requires Domain
+							< indexing manual
+							< parentrealm domainsuffix
+							< shortname slavedomain
+							< title DNS Slave
+							< allchildren true
+							< uniquein class
+							< uniqueclass DNSDomain:Master
+							< description DNS Slave zone
+							< explanation slavedomain.html
+							< magicdelimiter $
+							< prototype prototype
+							
+							< capabilities create update delete validate
+
+							< metatype derived
+							< metabase Meta:DNSDomain
+							< metadescription Slave to $masterip$
+	
+	string id				: Domain name
+							< example foobar.com
+	
+	string masterip			: Master server IP address
+							< regexp [:ipv4:]
+							< tooltip The IP address of the primary nameserver. 
+
+# ============================================================================
+# RECORD CLASSES
+# ============================================================================
+class Meta:DNSDomain:Record < uuid 9ff4bf1a-39db-4778-bd5a-435f975c1979
+							< version 1
+							< requires DNSDomain:Master
+							< indexing auto
+                            < shortname record
+                            < title DNS Record
+                            < description DNS record
+                            
+                            < metatype base
+                            
+	string id				: Record < flags enabled
+	string name				: Name < gridwidth 35
+	string type				: Type < gridwidth 10
+	string address			: Address < gridwidth 40 
+	integer mxpref			: Pref < gridwidth 13
+	
+	string addressref		: Address
+							< nick address
+							< gridhide true
+							
+	string addressval		: Address
+							< nick address
+							< gridhide true
+
+
+# ----------------------------------------------------------------------------
+class DNSDomain:A			< uuid 844c8562-33ec-4204-a0f2-c6321de052d6
+							< version 1
+							< requires DNSDomain:Master
+							< shortname a
+							< title A
+							< indexing auto
+							< description DNS A record
+
+							< capabilities create update delete
+							
+							< metatype derived
+							< metabase Meta:DNSDomain:Record
+							< metadescription $name$ -> $addressval$
+	
+	group addressgroup		< flags enabled
+	
+	string name				: Record name
+							< example www
+							< flags enabled visible
+	
+	ref addressref			: Server Address
+							< group addressgroup
+							< nick address
+							< ref Network:Interface/address
+							< gridhide true
+
+	string addressval		: Address
+							< group addressgroup
+							< nick address
+							< gridhide true
+	
+
+# ----------------------------------------------------------------------------
+class DNSDomain:CNAME		< uuid d6f9ae8e-2eaa-4946-8fe7-cb82c3a1033c
+							< version 1
+							< requires DNSDomain:Master
+							< indexing auto
+							< shortname cname
+							< title CNAME
+							< description DNS CNAME record
+							
+							< capabilities create update delete
+							
+							< metatype derived
+							< metabase Meta:DNSDomain:Record
+							< metadescription $name$ -> $address$
+
+	string name				: Record name
+							< example www
+							< flags enabled visible
+							
+	string address			: Address
+							< example otherhost.com.
+							< tooltip The address to alias to. If you want to point to a fully qualified domain, the entry must end with a dot
+
+
+# ----------------------------------------------------------------------------
+class DNSDomain:MX			< uuid 63cfb180-3217-4b6c-9080-1967bb15eccb
+							< version 1
+							< requires DNSDomain:Master
+							< indexing auto
+							< shortname mx
+							< title MX
+							< description DNS MX record
+							
+							< capabilities create update delete
+							
+							< metatype derived
+							< metabase Meta:DNSDomain:Record
+							< metadescription $name$ -> $address$
+
+	string name				: Record name
+							< example www
+							< flags enabled visible
+
+	integer mxpref			: MX Preference
+							
+	string address			: Mailserver Hostname
+							< example otherhost.com.
+							< tooltip The mail server address (must be a hostname, not an IP address)
+
+
+# ----------------------------------------------------------------------------
+class DNSDomain:NS			< uuid 005f8d68-63c2-4188-9067-5da1f521bf78
+							< version 1
+							< requires DNSDomain:Master
+							< indexing auto
+							< shortname ns
+							< title NS
+							< description DNS NS record
+							
+							< capabilities create update delete
+							
+							< metatype derived
+							< metabase Meta:DNSDomain:Record
+							< metadescription $name$ -> $address$
+
+	string name				: Record name
+							< example www
+							< flags enabled visible
+							
+	string address			: Address
+							< example otherhost.com.
+							< tooltip The name server address (must be a hostname, not an IP address)
+
+# ============================================================================
+# ENUMS
+# ============================================================================
+enum ttl					
+	value 300				: 5 minutes
+	value 3600				: 1 hour
+	value 86400				: 1 day
+	value 604800			: 1 week
+							
+# ============================================================================
+# AUTHD
+# ============================================================================
+authd fileops
+	match *.zone			: /var/named/openpanel
+							< user root
+							< group root
+							< perms 0644
+	match *.slavezone		: /var/named/openpanel
+							< user root
+							< group root
+							< perms 0644
+	match zones.conf		: /var/named/openpanel
+							< user root
+							< group root
+							< perms 0644
+
+authd services
+	service %%SERVICENAME%%
+
+# ============================================================================
+# DISTRO MACROS
+# ============================================================================
+
+distro debian
+	macro SERVICENAME		: bind9
+	
+distro redhat
+	macro SERVICENAME		: named

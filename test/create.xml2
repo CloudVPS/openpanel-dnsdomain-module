@@ -1,0 +1,28 @@
+<openpanel.module.domain>
+	<string id="ctx">Domain</string>
+	<dict id="create">
+		<dict id="info">
+			<dict id="session">
+				<string id="OpenCORE:Capabilities"/>
+				<dict id="OpenCORE:Session">
+					<string id="sessionid">4151befa-168f-41c9-beac-21607eea4197</string>
+					<string id="classid">Domain</string>
+					<string id="objectid">wibble.com</string>
+				</dict>
+				<dict id="User">
+					<string id="id">pi@madscience.nl</string>
+				</dict>
+			</dict>
+				<dict id="Domain">
+					<string id="ns">ns1.wubble.com.</string>
+					<string id="id">wubble.com</string>
+					<integer id="ttl">3600</integer>
+					<integer id="refresh">10800</integer>
+					<integer id="retry">3600</integer>
+					<integer id="expire">604800</integer>
+					<integer id="minimum">86400</integer>
+				</dict>
+			</dict>
+		</dict>
+	</dict>
+</openpanel.module.domain>

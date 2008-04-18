@@ -1,0 +1,8 @@
+<openpanel.module.domain>
+	<config>
+		<varpath>/var/opencore/conf/staging/DNSDomain</varpath>
+		<zonepath>/var/named/openpanel</zonepath>
+		<zoneconffile>zones.conf</zoneconffile>
+		<servicename>bind9</servicename>
+	</config>
+</openpanel.module.domain>

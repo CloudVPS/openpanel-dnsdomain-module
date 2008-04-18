@@ -1,0 +1,44 @@
+1469
+<dict>
+	<string id="OpenCORE:Command">create</string>
+	<string id="OpenCORE:Capabilities"/>
+	<dict id="OpenCORE:Session">
+		<string id="sessionid">4151befa-168f-41c9-beac-21607eea4197</string>
+		<string id="classid">DNSDomain</string>
+		<string id="objectid">wibble.com</string>
+	</dict>
+	<dict id="User">
+		<string id="id">pi@madscience.nl</string>
+	</dict>
+	<dict id="DNSDomain" type="object">
+		<string id="ns">ns1.wubble.com.</string>
+		<string id="id">wubble.com</string>
+		<integer id="ttl">3600</integer>
+		<integer id="refresh">10800</integer>
+		<integer id="retry">3600</integer>
+		<integer id="expire">604800</integer>
+		<integer id="minimum">86400</integer>		
+		<dict id="DNSDomain:Record" type="object">
+			<dict id="ffffffff-ffff-ffff-ffff-ffffffffff01">
+				<string id="name">www</string>
+				<string id="type">A</string>
+				<string id="address">10.0.0.5</string>
+			</dict>
+			<dict id="ffffffff-ffff-ffff-ffff-ffffffffff02">
+				<string id="name">mail</string>
+				<string id="type">A</string>
+				<string id="address">10.0.0.5</string>
+			</dict>
+			<dict id="ffffffff-ffff-ffff-ffff-ffffffffff03">
+				<string id="name">ns1</string>
+				<string id="type">A</string>
+				<string id="address">10.0.0.5</string>
+			</dict>
+			<dict id="ffffffff-ffff-ffff-ffff-ffffffffff04">
+				<string id="name">ns2</string>
+				<string id="type">A</string>
+				<string id="address">10.0.0.5</string>
+			</dict>
+		</dict>
+	</dict>
+</dict>

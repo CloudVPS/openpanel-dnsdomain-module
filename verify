@@ -1,0 +1,61 @@
+#!/bin/sh
+# --------------------------------------------------------------------------
+# OpenPanel - The Open Source Control Panel
+# Copyright (c) 2006-2007 PanelSix
+#
+# This software and its source code are subject to version 2 of the
+# GNU General Public License. Please be aware that use of the OpenPanel
+# and PanelSix trademarks and the IconBase.com iconset may be subject
+# to additional restrictions. For more information on these restrictions
+# and for a copy of version 2 of the GNU General Public License, please
+# visit the Legal and Privacy Information section of the OpenPanel
+# website on http:#www.openpanel.com/
+# --------------------------------------------------------------------------
+exit 0
+if [ ! -d "/var/named/openpanel" ]; then
+  echo "No openpanel directory in /var/named"
+  echo "quit" >&3
+  exit 1
+fi
+
+if [ -f /etc/named.conf ]; then
+  grep "^include ./var/named/openpanel/zones\.conf" /etc/named.conf >/dev/null || {
+    echo "zones.conf included in config"
+    echo "quit" >&3
+    exit 1
+  }
+  /etc/init.d/named status 2>&1 | grep "running" >/dev/null 2>&1 || {
+    echo "Bind not running"
+    echo "quit" >&3
+    exit 1
+  }
+else
+  if [ ! -d /etc/bind ]; then
+    echo "Bind not found"
+    echo "quit" >&3
+    exit 1
+  fi
+  grep "^include ./var/named/openpanel/zones\.conf" /etc/bind/named.conf >/dev/null 2>&1 || {
+    echo "Openpanel.d not included in config"
+    echo "quit" >&3
+    exit 1
+  }
+  if [ ! -f /var/run/bind/run/named.pid ]; then
+    echo "Bind not running"
+    echo "quit" >&3
+    exit 1
+  fi
+  PID=`cat /var/run/bind/run/named.pid`
+  if [ -z "$PID" ]; then
+    echo "Bind empty pid"
+    echo "quit" >&3
+    exit 1
+  fi
+
+  out=`ps $PID | grep -v TIME.COMMAND`
+  if [ -z "$out" ]; then
+    echo "Bind not running"
+    echo "quit" >&3
+    exit 1
+  fi
+fi
