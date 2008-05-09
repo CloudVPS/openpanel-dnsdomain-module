@@ -498,7 +498,8 @@ bool domainModule::writenamedConf (void)
 bool domainModule::checkconfig (value &ibody)
 {
 	value domainclasses = $("DNSDomain:Master",true) ->
-						  $("DNSDomain:Slave",true);
+						  $("DNSDomain:Slave",true) ->
+						  $("System:AXFR",true);
 						  
 	value recordclasses = $("DNSDomain:A",true) ->
 						  $("DNSDomain:MX",true) ->
