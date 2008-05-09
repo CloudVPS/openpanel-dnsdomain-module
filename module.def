@@ -247,7 +247,7 @@ class DNSDomain:NS			< uuid 005f8d68-63c2-4188-9067-5da1f521bf78
 # ----------------------------------------------------------------------------
 class System:AXFR			< uuid 13b15316-8960-40f8-ac8d-462872a33831
 							< version 1
-							< requires OpenCORE:System
+							< requires OpenCORE:Prefs
 							< indexing manual
 							< uniquein parent
 							< shortname axfrhost
