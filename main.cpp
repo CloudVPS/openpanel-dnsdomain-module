@@ -519,6 +519,8 @@ bool domainModule::checkconfig (value &ibody)
 					"Unknown class '%s'" %format (classid));
 		return false;
 	}
+	
+	if (classid == "System:AXFR") return true;
 
 	if (! (ibody.exists ("DNSDomain:Master") ||
 		   ibody.exists ("DNSDomain:Slave")))
