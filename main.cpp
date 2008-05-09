@@ -654,7 +654,7 @@ void domainModule::handleaxfr (const string &cmd, const statstring &id)
 	if (authd.installfile ("axfr.conf", "/var/named/openpanel"))
 	{
 		sendresult (moderr::err_writefile, "Error installing axfr.conf file");
-		return 
+		return;
 	}
 	
 	sendresult (moderr::ok, "OK");
