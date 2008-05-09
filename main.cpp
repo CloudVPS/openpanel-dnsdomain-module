@@ -459,6 +459,7 @@ bool domainModule::writenamedConf (void)
 	// Try to open file for reading	
 	if (f.openwrite (conffile, 0644))
 	{
+		f.writeln ("include \"/var/named/openpanel/axfr.conf\";");
 		value zonefiles = fs.ls(conf["config"]["varpath"], false);
 		foreach (z, zonefiles)
 		{
@@ -470,6 +471,7 @@ bool domainModule::writenamedConf (void)
 				f.writeln ("\t type master;");
 				f.writeln ("\t file \"%s/%s\";" %format
 										(conf["config"]["zonepath"], z.id()));
+				f.writeln ("\t allow-transfer { openpanel-axfr; };");
 				f.writeln ("};\n");
 			}
 			else if (p == "slavezone")
