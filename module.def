@@ -243,6 +243,25 @@ class DNSDomain:NS			< uuid 005f8d68-63c2-4188-9067-5da1f521bf78
 							< example otherhost.com.
 							< tooltip The name server address (must be a hostname, not an IP address)
 
+
+# ----------------------------------------------------------------------------
+class System:AXFR			< uuid 13b15316-8960-40f8-ac8d-462872a33831
+							< version 1
+							< requires OpenCORE:System
+							< indexing manual
+							< uniquein parent
+							< shortname axfrhost
+							< title Slave DNS
+							< description DNS AXFR Slave Server
+							< sortindex 52
+							< allchildren true
+							
+							< capabilities create delete
+							
+	string id				: Server IP address
+							< gridwidth 98
+							< regexp [:ipv4:]
+							
 # ============================================================================
 # ENUMS
 # ============================================================================
@@ -265,6 +284,10 @@ authd fileops
 							< group root
 							< perms 0644
 	match zones.conf		: /var/named/openpanel
+							< user root
+							< group root
+							< perms 0644
+	match axfr.conf			: /var/named/openpanel
 							< user root
 							< group root
 							< perms 0644

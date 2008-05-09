@@ -52,6 +52,12 @@ int domainModule::main (void)
 	if (! checkconfig (data))
 		return 0;
 		
+	if (data["OpenCORE:Context"] == "System:AXFR")
+	{
+		handleaxfr (data["OpenCORE:Command"],
+					data["OpenCORE:Session"]["objectid"]);
+	}
+		
 	statstring domid = data["Domain"]["id"];
 	string prizone;
 	bool isSlave = false;
@@ -568,11 +574,9 @@ bool domainModule::recordexists (const value &v, const string &fname)
 {
 	if (! v.exists (fname))
 	{
-		string errval;
+		string errval = "Missing required field: %s" %format (fname);
+		sendresult (moderr::err_notfound, errval);
 		
-		errval.printf ("Missing required field: %s", fname.str());
-		
-		sendresult (moderr::err_notfound, fname);
 		return false;
 	}
 	
@@ -596,4 +600,53 @@ bool domainModule::confSystem (config::action act, keypath &kp,
 	}
 
 	return false;
+}
+
+void domainModule::handleaxfr (const string &cmd, const statstring &id)
+{
+	value data;
+	file f;
+	f.openread ("/var/named/axfr.conf");
+	while (! f.eof ())
+	{
+		string ln = f.gets ();
+		if (ln[0] == '\t')
+		{
+			ln.cropafterlast ('\t');
+			ln.cropat (';');
+			data[ln] = true;
+		}
+	}
+	f.close ();
+	
+	caseselector (cmd)
+	{
+		incaseof ("create") :
+			data[id] = true;
+			break;
+		
+		incaseof ("delete") :
+			data.rmval (id);
+			break;
+		
+		defaultcase :
+			sendresult (moderr::err_context, "Invalid action");
+			return;
+	}
+	
+	f.openwrite ("axfr.conf");
+	f.writeln ("acl openpanel-axfr {");
+	foreach (d, data)
+	{
+		f.writeln ("\t%s;" %format (d.id()));
+	}
+	f.writeln ("};");
+	f.close ();
+	if (! authd.installfile ("axfr.conf", "/var/named"))
+	{
+		sendresult (moderr::err_writefile, "Error installing axfr.conf file");
+		return ;
+	}
+	
+	sendresult (moderr::ok, "OK");
 }

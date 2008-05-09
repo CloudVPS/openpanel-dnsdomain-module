@@ -77,6 +77,8 @@ protected:
 			 // checkconfig helper function
 	bool 	 recordexists (const value &v, const string &fname);
 	
+	void	 handleaxfr (const string &cmd, const statstring &id);
+	
 };
 
 #endif
