@@ -612,7 +612,7 @@ void domainModule::handleaxfr (const string &cmd, const statstring &id)
 	value data;
 	file f;
 	
-	if (f.openread ("/var/named/axfr.conf"))
+	if (f.openread ("/var/named/openpanel/axfr.conf"))
 	{
 		while (! f.eof ())
 		{
