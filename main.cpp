@@ -56,6 +56,8 @@ int domainModule::main (void)
 	{
 		handleaxfr (data["OpenCORE:Command"],
 					data["OpenCORE:Session"]["objectid"]);
+					
+		return 0;
 	}
 		
 	statstring domid = data["Domain"]["id"];
@@ -609,18 +611,21 @@ void domainModule::handleaxfr (const string &cmd, const statstring &id)
 {
 	value data;
 	file f;
-	f.openread ("/var/named/axfr.conf");
-	while (! f.eof ())
+	
+	if (f.openread ("/var/named/axfr.conf"))
 	{
-		string ln = f.gets ();
-		if (ln[0] == '\t')
+		while (! f.eof ())
 		{
-			ln.cropafterlast ('\t');
-			ln.cropat (';');
-			data[ln] = true;
+			string ln = f.gets ();
+			if (ln[0] == '\t')
+			{
+				ln.cropafterlast ('\t');
+				ln.cropat (';');
+				data[ln] = true;
+			}
 		}
+		f.close ();
 	}
-	f.close ();
 	
 	caseselector (cmd)
 	{
@@ -637,7 +642,7 @@ void domainModule::handleaxfr (const string &cmd, const statstring &id)
 			return;
 	}
 	
-	f.openwrite ("axfr.conf");
+	f.openwrite ("/var/opencore/conf/staging/DNSDomain/axfr.conf");
 	f.writeln ("acl openpanel-axfr {");
 	foreach (d, data)
 	{
