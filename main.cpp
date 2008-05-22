@@ -619,7 +619,7 @@ void domainModule::handleaxfr (const string &cmd, const statstring &id)
 		while (! f.eof ())
 		{
 			string ln = f.gets ();
-			if (ln[0] == '\t')
+			if (ln && ln[0] == '\t')
 			{
 				ln.cropafterlast ('\t');
 				ln.cropat (';');
