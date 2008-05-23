@@ -644,6 +644,8 @@ void domainModule::handleaxfr (const string &cmd, const statstring &id)
 			return;
 	}
 	
+	if (! data.count()) data["127.0.0.1"] = true;
+	
 	f.openwrite ("/var/opencore/conf/staging/DNSDomain/axfr.conf");
 	f.writeln ("acl openpanel-axfr {");
 	foreach (d, data)
