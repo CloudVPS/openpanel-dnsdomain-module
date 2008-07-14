@@ -479,7 +479,8 @@ bool domainModule::writenamedConf (void)
 				string masterip = fs.load (z["path"]);
 				f.writeln ("zone \"%s\" {" %format (q));
 				f.writeln ("\t type slave;");
-				f.writeln ("\t file \"%s.slavedata\";" %format (q));
+				f.writeln ("\t file \"%s/slaves/%s.slavedata\";"
+					%format (q, conf["config"]["zonepath"]));
 				f.writeln ("\t masters { %s; };" %format (masterip));
 				f.writeln ("};\n");
 			}
