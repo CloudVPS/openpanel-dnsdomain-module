@@ -480,7 +480,7 @@ bool domainModule::writenamedConf (void)
 				f.writeln ("zone \"%s\" {" %format (q));
 				f.writeln ("\t type slave;");
 				f.writeln ("\t file \"%s/slaves/%s.slavedata\";"
-					%format (q, conf["config"]["zonepath"]));
+					%format (conf["config"]["zonepath"], q));
 				f.writeln ("\t masters { %s; };" %format (masterip));
 				f.writeln ("};\n");
 			}
