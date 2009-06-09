@@ -16,6 +16,7 @@
 
 #include <grace/file.h>
 #include <grace/filesystem.h>
+#include <grace/http.h>
 
 
 APPOBJECT(domainModule);
