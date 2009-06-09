@@ -152,23 +152,12 @@ class DNSDomain:A			< uuid 844c8562-33ec-4204-a0f2-c6321de052d6
 							< metabase Meta:DNSDomain:Record
 							< metadescription $name$ -> $addressval$
 	
-	group addressgroup		< flags enabled
-	
 	string name				: Record name
 							< example www
 							< flags enabled visible
 	
-	ref addressref			: Server Address
-							< group addressgroup
-							< nick address
-							< ref Network:Interface/address
-							< gridhide true
-
-	string addressval		: Address
-							< group addressgroup
-							< nick address
-							< gridhide true
-	
+	string address			: Address
+							< flags enabled
 
 # ----------------------------------------------------------------------------
 class DNSDomain:CNAME		< uuid d6f9ae8e-2eaa-4946-8fe7-cb82c3a1033c

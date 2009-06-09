@@ -227,31 +227,18 @@ int domainModule::main (void)
 void domainModule::sendGetConfig (void)
 {
 	value dnsdom;
+	httpsocket hs;
 	
-	bool haseth0 = false;
-	file fproc;
-	if (fproc.openread ("/proc/net/dev"))
+	string defaddr = "192.168.1.1";
+	string ipqjson = hs.get ("http://ipinfodb.com/ip_query.php?output=json");
+	value ipq;
+	ipq.fromjson (ipqjson);
+	if (ipq.exists ("Ip"))
 	{
-		while (! fproc.eof())
-		{
-			string ln = fproc.gets ();
-			ln.cropat (':');
-			ln = ln.trim (" ");
-			if (ln == "eth0") haseth0 = true;
-		}
-		
-		fproc.close ();
+		defaddr = ipq["Ip"];
 	}
 	
-	value theaddr;
-	if (haseth0)
-	{
-		theaddr = $("addressref", "$REF$Network:Interface$uuid$eth0");
-	}
-	else
-	{
-		theaddr = $("addressval", "192.168.1.1");
-	}
+	value theaddr = $("address", defaddr);
 	
 	dnsdom = $("DNSDomain:Master",
 					$attr("type", "class") ->
