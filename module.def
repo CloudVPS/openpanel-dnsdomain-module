@@ -66,18 +66,22 @@ class DNSDomain:Master 		< uuid 4629fca4-5672-4273-bc92-b9ad863c9028
 	integer refresh			: Refresh time
 							< regexp [:numbers:]
 							< default 16384
+							< textwidth 6
 							
 	integer retry			: Retry time
 							< regexp [:numbers:]
 							< default 2048
+							< textwidth 6
 							
 	integer expire 			: Expiration time
 							< regexp [:numbers:]
 							< default 1048576
+							< textwidth 6
 							
 	integer minimum			: Minimum
 							< regexp [:numbers:]
 							< default 2560
+							< textwidth 6
 
 
 # ----------------------------------------------------------------------------
@@ -151,6 +155,7 @@ class DNSDomain:A			< uuid 844c8562-33ec-4204-a0f2-c6321de052d6
 	
 	string address			: Address
 							< flags enabled
+							< textwidth 16
 
 # ----------------------------------------------------------------------------
 class DNSDomain:CNAME		< uuid d6f9ae8e-2eaa-4946-8fe7-cb82c3a1033c
@@ -244,6 +249,7 @@ class System:AXFR			< uuid 13b15316-8960-40f8-ac8d-462872a33831
 							< capabilities create delete
 							
 	string id				: Server IP address
+							< textwidth 16
 							< gridwidth 98
 							< regexp [:ipv4:]
 							
