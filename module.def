@@ -119,6 +119,7 @@ class Meta:DNSDomain:Record < uuid 9ff4bf1a-39db-4778-bd5a-435f975c1979
                             < shortname record
                             < title DNS Record
                             < description DNS record
+                            < hasprototype true
                             
                             < metatype base
                             
@@ -136,6 +137,7 @@ class DNSDomain:A			< uuid 844c8562-33ec-4204-a0f2-c6321de052d6
 							< title A
 							< indexing auto
 							< description DNS A record
+                            < hasprototype true
 
 							< capabilities create update delete
 							
@@ -158,6 +160,7 @@ class DNSDomain:CNAME		< uuid d6f9ae8e-2eaa-4946-8fe7-cb82c3a1033c
 							< shortname cname
 							< title CNAME
 							< description DNS CNAME record
+                            < hasprototype true
 							
 							< capabilities create update delete
 							
@@ -182,6 +185,7 @@ class DNSDomain:MX			< uuid 63cfb180-3217-4b6c-9080-1967bb15eccb
 							< shortname mx
 							< title MX
 							< description DNS MX record
+                            < hasprototype true
 							
 							< capabilities create update delete
 							
@@ -208,6 +212,7 @@ class DNSDomain:NS			< uuid 005f8d68-63c2-4188-9067-5da1f521bf78
 							< shortname ns
 							< title NS
 							< description DNS NS record
+                            < hasprototype true
 							
 							< capabilities create update delete
 							
