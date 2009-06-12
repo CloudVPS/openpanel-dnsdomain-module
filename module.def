@@ -243,7 +243,7 @@ class System:AXFR			< uuid 13b15316-8960-40f8-ac8d-462872a33831
 							< shortname axfrhost
 							< title Slave DNS
 							< description DNS AXFR Slave Server
-							< sortindex 52
+							< sortindex 252
 							< allchildren true
 							
 							< capabilities create delete
