@@ -73,7 +73,7 @@ class DNSDomain:Master 		< uuid 4629fca4-5672-4273-bc92-b9ad863c9028
 							< default 2048
 							< textwidth 7
 							< sameline true
-							< labelwidth 80
+							< labelwidth 113
 							
 	integer expire 			: Expiration time
 							< regexp [:numbers:]
@@ -85,7 +85,7 @@ class DNSDomain:Master 		< uuid 4629fca4-5672-4273-bc92-b9ad863c9028
 							< default 2560
 							< textwidth 7
 							< sameline true
-							< labelwidth 80
+							< labelwidth 113
 
 
 # ----------------------------------------------------------------------------
