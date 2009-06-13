@@ -66,22 +66,26 @@ class DNSDomain:Master 		< uuid 4629fca4-5672-4273-bc92-b9ad863c9028
 	integer refresh			: Refresh time
 							< regexp [:numbers:]
 							< default 16384
-							< textwidth 6
+							< textwidth 7
 							
 	integer retry			: Retry time
 							< regexp [:numbers:]
 							< default 2048
-							< textwidth 6
+							< textwidth 7
+							< sameline true
+							< labelwidth 80
 							
 	integer expire 			: Expiration time
 							< regexp [:numbers:]
 							< default 1048576
-							< textwidth 6
+							< textwidth 7
 							
 	integer minimum			: Minimum
 							< regexp [:numbers:]
 							< default 2560
-							< textwidth 6
+							< textwidth 7
+							< sameline true
+							< labelwidth 80
 
 
 # ----------------------------------------------------------------------------
