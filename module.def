@@ -8,6 +8,9 @@ module DNSDomain			< uuid 0fd76730-82bf-4f50-9e1a-a256c00a1d87
 							< requires Domain.module
 							< apitype xml
 							< getconfig true
+							< license GPL2
+							< author OpenPanel V.O.F.
+							< url http://www.openpanel.com/
 
 # ============================================================================
 # DOMAIN CLASSES
