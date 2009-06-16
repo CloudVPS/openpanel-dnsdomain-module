@@ -24,6 +24,7 @@ class Meta:DNSDomain        < uuid 17302eb3-bee7-4827-b0c6-4812d45b8c4d
 							< title DNS
                             < description DNS zone
                             < sortindex 30
+                            < emptytext DNS has not been configured for this domain.
 
 							< metatype base
 
@@ -252,6 +253,7 @@ class System:AXFR			< uuid 13b15316-8960-40f8-ac8d-462872a33831
 							< description DNS AXFR Slave Server
 							< sortindex 252
 							< allchildren true
+							< emptytext No secondary slave servers have been configured for this host.
 							
 							< capabilities create delete
 							
