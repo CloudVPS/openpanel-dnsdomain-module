@@ -24,6 +24,7 @@ class Meta:DNSDomain        < uuid 17302eb3-bee7-4827-b0c6-4812d45b8c4d
 							< title DNS
                             < description DNS zone
                             < sortindex 30
+                            < hidegrid true
                             < emptytext DNS has not been configured for this domain.
 
 							< metatype base
