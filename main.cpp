@@ -247,10 +247,6 @@ void domainModule::sendGetConfig (void)
 						$attr("type", "object") ->
 						$("primaryns", "ns.$prototype$") ->
 						$("ttl", 3600) ->
-						$("refresh", 16384) ->
-						$("retry", 2048) ->
-						$("expire", 1048576) ->
-						$("minimum", 2560) ->
 						$("DNSDomain:A",
 							$attr("type", "class") ->
 							$(
@@ -341,10 +337,10 @@ bool domainModule::write_zonefile 	(const string &filename,
 											       domainname.cval());
 		
 		f.printf ("\n%u\t; Serial\n", 		 kernel.time.now());
-		f.printf ("%u\t\t; Refresh\n", 		 domain["refresh"].uval());
-		f.printf ("%u\t\t; Retry\n", 		 domain["retry"].uval());
-		f.printf ("%u\t\t; Expire\n", 		 domain["expire"].uval());
-		f.printf ("%u )\t\t; Minimum\n\n\n", domain["minimum"].uval());
+		f.printf ("%u\t\t; Refresh\n", 		 16384);
+		f.printf ("%u\t\t; Retry\n", 		 2048);
+		f.printf ("%u\t\t; Expire\n", 		 1048576);
+		f.printf ("%u )\t\t; Minimum\n\n\n", 2560);
 	
 
 		// Write all A records

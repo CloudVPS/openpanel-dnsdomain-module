@@ -36,7 +36,7 @@ class Meta:DNSDomain        < uuid 17302eb3-bee7-4827-b0c6-4812d45b8c4d
 
 # ----------------------------------------------------------------------------
 class DNSDomain:Master 		< uuid 4629fca4-5672-4273-bc92-b9ad863c9028
-							< version 1
+							< version 2
 							< requires Domain
 							< indexing manual
 							< uniquein class
@@ -64,33 +64,10 @@ class DNSDomain:Master 		< uuid 4629fca4-5672-4273-bc92-b9ad863c9028
 							< example ns1.foobar.com
 							
 	enum ttl 				: Time to Live
+							< sameline true
 							< regexp [:numbers:]
 							< example 3600
 							< default 3600
-	
-	integer refresh			: Refresh time
-							< regexp [:numbers:]
-							< default 16384
-							< textwidth 7
-							
-	integer retry			: Retry time
-							< regexp [:numbers:]
-							< default 2048
-							< textwidth 7
-							< sameline true
-							< labelwidth 113
-							
-	integer expire 			: Expiration time
-							< regexp [:numbers:]
-							< default 1048576
-							< textwidth 7
-							
-	integer minimum			: Minimum
-							< regexp [:numbers:]
-							< default 2560
-							< textwidth 7
-							< sameline true
-							< labelwidth 113
 
 
 # ----------------------------------------------------------------------------
