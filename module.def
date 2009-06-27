@@ -110,7 +110,7 @@ class Meta:DNSDomain:Record < uuid 9ff4bf1a-39db-4778-bd5a-435f975c1979
                             < title DNS Record
                             < description DNS record
                             < hasprototype true
-                            < gridheight 121
+                            < gridheight 118
                             < gridmargin -20
                             
                             < metatype base
