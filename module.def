@@ -110,7 +110,7 @@ class Meta:DNSDomain:Record < uuid 9ff4bf1a-39db-4778-bd5a-435f975c1979
                             < title DNS Record
                             < description DNS record
                             < hasprototype true
-                            < gridheight 170
+                            < gridheight 121
                             < gridmargin -20
                             
                             < metatype base
@@ -169,7 +169,7 @@ class DNSDomain:AAAA		< uuid a8d4117c-eaf7-4f64-9810-de0dda3934f3
 	string address			: Address
 							< regexp [:ipv6:]
 							< flags enabled
-							< textwidth 16
+							< textwidth 20
 
 # ----------------------------------------------------------------------------
 class DNSDomain:CNAME		< uuid d6f9ae8e-2eaa-4946-8fe7-cb82c3a1033c
