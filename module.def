@@ -142,6 +142,32 @@ class DNSDomain:A			< uuid 844c8562-33ec-4204-a0f2-c6321de052d6
 							< flags enabled visible
 	
 	string address			: Address
+							< regexp [:ipv4:]
+							< flags enabled
+							< textwidth 16
+
+# ----------------------------------------------------------------------------
+class DNSDomain:AAAA		< uuid a8d4117c-eaf7-4f64-9810-de0dda3934f3
+							< version 1
+							< requires DNSDomain:Master
+							< shortname aaaa
+							< title AAAA
+							< indexing auto
+							< description DNS AAAA (IPv6) record
+                            < hasprototype true
+
+							< capabilities create update delete
+							
+							< metatype derived
+							< metabase Meta:DNSDomain:Record
+							< metadescription $name$ -> $addressval$
+	
+	string name				: Record name
+							< example www
+							< flags enabled visible
+	
+	string address			: Address
+							< regexp [:ipv6:]
 							< flags enabled
 							< textwidth 16
 
@@ -221,6 +247,31 @@ class DNSDomain:NS			< uuid 005f8d68-63c2-4188-9067-5da1f521bf78
 							< example otherhost.com.
 							< tooltip The name server address (must be a hostname, not an IP address)
 
+
+# ----------------------------------------------------------------------------
+class DNSDomain:TXT			< uuid 1dd06c1f-268b-4638-8446-df7af1f745fb
+							< version 1
+							< requires DNSDomain:Master
+							< shortname txt
+							< title TXT
+							< indexing auto
+							< description DNS text record
+                            < hasprototype true
+
+							< capabilities create update delete
+							
+							< metatype derived
+							< metabase Meta:DNSDomain:Record
+							< metadescription $name$ -> $addressval$
+	
+	string name				: Record name
+							< example www
+							< flags enabled visible
+	
+	string address			: Value
+							< regexp [:names:]
+							< flags enabled
+							< textwidth 24
 
 # ----------------------------------------------------------------------------
 class System:AXFR			< uuid 13b15316-8960-40f8-ac8d-462872a33831

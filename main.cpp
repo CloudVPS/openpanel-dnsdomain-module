@@ -386,6 +386,19 @@ bool domainModule::write_zonefile 	(const string &filename,
 
 		f.writeln ("");
 
+		foreach (v, domain["DNSDomain:AAAA"])
+		{	
+			string sname = v["name"];
+			if (! sname) sname = "@";
+			
+			if (sname.strlen() < 30);
+				sname.pad (30, ' ');
+
+			f.writeln ("%s IN A            %s" %format (sname, v["address"]));
+		}
+		
+		f.writeln ("");
+
 		foreach (v, domain["DNSDomain:CNAME"])
 		{	
 			string sname = v["name"];
