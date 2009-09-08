@@ -1,0 +1,12 @@
+Source: openpanel-mod-dnsdomain
+Section: misc
+Priority: optional
+Maintainer: OpenPanel/Panel6 packager <packages@panelsix.com>
+Build-Depends: debhelper (>= 5)
+Standards-Version: 3.7.2
+
+Package: openpanel-mod-dnsdomain
+Architecture: any
+Depends: , openpanel-core (>= 0.8.3), openpanel-mod-domain, bind9
+Description: Bind 9 administration
+ Configure the BIND 9 DNS server through openpanel
