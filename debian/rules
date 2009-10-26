@@ -1,22 +1,24 @@
 #!/usr/bin/make -f
 
+build: build-stamp
+build-stamp:
+	./configure
+	make
+	touch build-stamp
 
-BUILD_ROOT=$(CURDIR)/debian/tmp
 install:
-trm -rf ${BUILD_ROOT}
-tmkdir -p ${BUILD_ROOT}/var/opencore/modules/DNSDomain.module
-tcp -rf ./dnsdomainmodule.app ${BUILD_ROOT}/var/opencore/modules/DNSDomain.module/
-tln -sf dnsdomainmodule.app/exec ${BUILD_ROOT}/var/opencore/modules/DNSDomain.module/action
-tcp module.xml techsupport.* *.html ${BUILD_ROOT}/var/opencore/modules/DNSDomain.module/
-tinstall -m 755 verify ${BUILD_ROOT}/var/opencore/modules/DNSDomain.module/verify
+	dh_testdir
+	dh_testroot
+	dh_installdirs
+	cp -rf ./dnsdomainmodule.app debian/openpanel-mod-dnsdomain/var/opencore/modules/DNSDomain.module/
+	ln -sf dnsdomainmodule.app/exec debian/openpanel-mod-dnsdomain/var/opencore/modules/DNSDomain.module/action
+	cp module.xml techsupport.* *.html debian/openpanel-mod-dnsdomain/var/opencore/modules/DNSDomain.module/
+	install -m 755 verify debian/openpanel-mod-dnsdomain/var/opencore/modules/DNSDomain.module/verify
+	touch install-stamp
 
-build:
-t./configure
-tmake
-binary-indep:
+binary-indep: build install
 
-binary-arch binary: build install
-	if [ -d debian/tmp ] ; then dh_install -a --sourcedir=debian/tmp ; fi
+binary-arch: build install
 	dh_installdocs -a
 	dh_installdeb -a
 	dh_compress -a
@@ -25,5 +27,12 @@ binary-arch binary: build install
 	dh_gencontrol -a
 	dh_md5sums -a
 	dh_builddeb -a
+
+binary: binary-indep binary-arch
+
+clean:
+	rm -f install-stamp build-stamp
+	[ ! -f makeinclude ] || make clean
+	dh_clean
 
 .PHONY: build binary binary-arch binary-indep clean install
