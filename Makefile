@@ -3,10 +3,10 @@ include makeinclude
 OBJ	= main.o version.o
 
 all: dnsdomainmodule.exe module.xml
-	mkapp dnsdomainmodule 
+	grace mkapp dnsdomainmodule 
 
 version.cpp:
-	mkversion version.cpp
+	grace mkversion version.cpp
 
 module.xml: module.def
 	mkmodulexml < module.def > module.xml
