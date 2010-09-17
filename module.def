@@ -64,7 +64,6 @@ class DNSDomain:Master 		< uuid 4629fca4-5672-4273-bc92-b9ad863c9028
 							< example ns1.foobar.com
 							
 	enum ttl 				: Time to Live
-							< sameline true
 							< regexp [:numbers:]
 							< example 3600
 							< default 3600
