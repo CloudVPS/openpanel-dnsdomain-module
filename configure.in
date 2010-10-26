@@ -1,5 +1,7 @@
 cxx
 grace
+gracepcre
+pcre
 pthread
 libsocket
 libcrypt
