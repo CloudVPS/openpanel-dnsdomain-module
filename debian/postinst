@@ -50,7 +50,7 @@ if [ ! -z "$XAPPARMOR" ]; then
     echo "$ln" >> $fn
   done
   mv $fn /etc/apparmor.d/$XAPPARMOR
-  invoke-rc.d apparmor restart
+  invoke-rc.d apparmor restart || true
 fi
 invoke-rc.d bind9 restart
 fi
