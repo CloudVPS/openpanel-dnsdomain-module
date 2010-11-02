@@ -2,7 +2,7 @@ Source: openpanel-mod-dnsdomain
 Section: misc
 Priority: optional
 Maintainer: OpenPanel/Panel6 packager <packages@panelsix.com>
-Build-Depends: debhelper (>= 5), libgrace, libgrace-devel, libgrace-pcre, openpanel-devel, openpanel-mkmodulexml
+Build-Depends: debhelper (>= 5), libgrace, libgrace-dev, libgrace-pcre, openpanel-dev, openpanel-mkmodulexml
 Standards-Version: 3.7.2
 
 Package: openpanel-mod-dnsdomain
