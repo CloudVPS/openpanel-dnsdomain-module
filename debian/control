@@ -7,6 +7,7 @@ Standards-Version: 3.7.2
 
 Package: openpanel-mod-dnsdomain
 Architecture: any
+Pre-Depends: openpanel-core, openpanel-authd, bind9
 Depends: openpanel-core (>= 0.8.3), openpanel-mod-domain, bind9, libgrace-pcre, ${shlibs:Depends}, ${misc:Depends}
 Description: OpenPanel module to manage Bind 9
  Configure the BIND 9 DNS server through openpanel
