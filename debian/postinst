@@ -44,34 +44,33 @@ case "$1" in
             // {{{openpanel.includes
             include "/var/named/openpanel/zones.conf";
             // }}}
-            _EOF_
+_EOF_
             echo "// Openpanel initial setup" >> /var/named/openpanel/zones.conf
             [ -e /etc/apparmor.d/apparmor-profile ] && XAPPARMOR=apparmor-profile
             [ -e /etc/apparmor.d/usr.sbin.named ] && XAPPARMOR=usr.sbin.named
             if [ ! -z "$XAPPARMOR" ]; then
-              fn="/etc/apparmor.d/.new.$XAPPARMOR"
-              rm -f $fn
-              cat /etc/apparmor.d/$XAPPARMOR | while read ln; do
-                xln=`echo "$ln" | sed -e "s/ *$//"`
-                if [ "$xln" = "}" ]; then
-                  echo "  /var/named/openpanel/* r," >> $fn
-                fi
-                echo "$ln" >> $fn
-              done
-              mv $fn /etc/apparmor.d/$XAPPARMOR
-              invoke-rc.d apparmor restart || true
+				fn="/etc/apparmor.d/.new.$XAPPARMOR"
+				rm -f $fn
+				cat /etc/apparmor.d/$XAPPARMOR | while read ln; do
+				xln=`echo "$ln" | sed -e "s/ *$//"`
+				if [ "$xln" = "}" ]; then
+					echo "  /var/named/openpanel/* r," >> $fn
+				fi
+				echo "$ln" >> $fn
+				done
+				mv $fn /etc/apparmor.d/$XAPPARMOR
+				invoke-rc.d apparmor restart || true
             fi
             invoke-rc.d bind9 restart
-            fi
-            if [ ! -f /var/named/openpanel/axfr.conf ]; then
-            cat > /var/named/openpanel/axfr.conf << _EOF_
-            acl openpanel-axfr {
-	            127.0.0.1;
-            };
+		fi
+        if [ ! -f /var/named/openpanel/axfr.conf ]; then
+	        cat > /var/named/openpanel/axfr.conf << _EOF_
+	        acl openpanel-axfr {
+		        127.0.0.1;
+	        };
 _EOF_
         fi
-        invoke-rc.d openpanel-core reload
-
+	    invoke-rc.d openpanel-core reload
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
