@@ -80,7 +80,15 @@ int domainModule::main (void)
 	{
 		if (domprefix)
 		{
-			string alias = "%s.%s" %format (domprefix, aliasdoms["id"]);
+			string alias;
+			if (domprefix[-1] == '.')
+			{
+				alias = "%s%s" %format (domprefix, aliasdoms["id"]);
+			}
+			else
+			{
+				alias = "%s.%s" %format (domprefix, aliasdoms["id"]);
+			}
 			zonelist.newval() = alias;
 		}
 		else
