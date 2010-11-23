@@ -29,11 +29,11 @@ set -e
 case "$1" in
     configure)
         NAMEDCONF=/etc/bind/named.conf
-        mkdir -p /var/opencore/conf/staging/DNSDomain
+        mkdir -p /var/openpanel/conf/staging/DNSDomain
         mkdir -p /var/named/openpanel
         mkdir -p /var/named/openpanel/slaves
         chown bind:bind /var/named/openpanel/slaves
-        chown opencore:authd /var/opencore/conf/staging/DNSDomain
+        chown openpanel-core:openpanel-authd /var/openpanel/conf/staging/DNSDomain
         OPENPANEL_TAG="// {{{openpanel.includes"
         if grep -q "$OPENPANEL_TAG" "$NAMEDCONF"; then
                 echo -n ""

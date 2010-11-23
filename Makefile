@@ -23,7 +23,7 @@ module.xml: module.def
 dnsdomainmodule.exe: $(OBJ) module.xml
 	./addflavor.sh
 	$(LD) $(LDFLAGS) -o dnsdomainmodule.exe $(OBJ) $(LIBS) \
-	/usr/lib/opencore/libcoremodule.a
+	/usr/lib/openpanel-core/libcoremodule.a
 
 clean:
 	rm -f *.o *.exe

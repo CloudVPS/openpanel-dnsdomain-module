@@ -11,7 +11,7 @@
 -->
 <openpanel.module.domain>
 	<config>
-		<varpath>/var/opencore/conf/staging/DNSDomain</varpath>
+		<varpath>/var/openpanel/conf/staging/DNSDomain</varpath>
 		<zonepath>/var/named/openpanel</zonepath>
 		<zoneconffile>zones.conf</zoneconffile>
 		<servicename>named</servicename>

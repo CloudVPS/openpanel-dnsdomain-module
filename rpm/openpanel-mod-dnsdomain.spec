@@ -43,19 +43,19 @@ make
 %install
 BUILD_ROOT=$RPM_BUILD_ROOT
 rm -rf ${BUILD_ROOT}
-mkdir -p ${BUILD_ROOT}/var/opencore/modules/DNSDomain.module
-cp -rf ./dnsdomainmodule.app ${BUILD_ROOT}/var/opencore/modules/DNSDomain.module/
-ln -sf dnsdomainmodule.app/exec ${BUILD_ROOT}/var/opencore/modules/DNSDomain.module/action
-cp module.xml techsupport.* *.html ${BUILD_ROOT}/var/opencore/modules/DNSDomain.module/
-install -m 755 verify ${BUILD_ROOT}/var/opencore/modules/DNSDomain.module/verify
+mkdir -p ${BUILD_ROOT}/var/openpanel/modules/DNSDomain.module
+cp -rf ./dnsdomainmodule.app ${BUILD_ROOT}/var/openpanel/modules/DNSDomain.module/
+ln -sf dnsdomainmodule.app/exec ${BUILD_ROOT}/var/openpanel/modules/DNSDomain.module/action
+cp module.xml techsupport.* *.html ${BUILD_ROOT}/var/openpanel/modules/DNSDomain.module/
+install -m 755 verify ${BUILD_ROOT}/var/openpanel/modules/DNSDomain.module/verify
 
 %post
 NAMEDCONF=/etc/named.conf
-mkdir -p /var/opencore/conf/staging/DNSDomain
+mkdir -p /var/openpanel/conf/staging/DNSDomain
 mkdir -p /var/named/openpanel
 mkdir -p /var/named/openpanel/slaves
 chown named:named /var/named/openpanel/slaves
-chown opencore:authd /var/opencore/conf/staging/DNSDomain
+chown openpanel-core:openpanel-authd /var/openpanel/conf/staging/DNSDomain
 OPENPANEL_TAG="// {{{openpanel.includes"
 if grep -q "$OPENPANEL_TAG" "$NAMEDCONF"; then
         echo -n ""

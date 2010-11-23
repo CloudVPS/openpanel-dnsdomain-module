@@ -18,10 +18,10 @@ install:
 	dh_testdir
 	dh_testroot
 	dh_installdirs
-	cp -rf ./dnsdomainmodule.app debian/openpanel-mod-dnsdomain/var/opencore/modules/DNSDomain.module/
-	ln -sf dnsdomainmodule.app/exec debian/openpanel-mod-dnsdomain/var/opencore/modules/DNSDomain.module/action
-	cp module.xml techsupport.* *.html debian/openpanel-mod-dnsdomain/var/opencore/modules/DNSDomain.module/
-	install -m 755 verify debian/openpanel-mod-dnsdomain/var/opencore/modules/DNSDomain.module/verify
+	cp -rf ./dnsdomainmodule.app debian/openpanel-mod-dnsdomain/var/openpanel/modules/DNSDomain.module/
+	ln -sf dnsdomainmodule.app/exec debian/openpanel-mod-dnsdomain/var/openpanel/modules/DNSDomain.module/action
+	cp module.xml techsupport.* *.html debian/openpanel-mod-dnsdomain/var/openpanel/modules/DNSDomain.module/
+	install -m 755 verify debian/openpanel-mod-dnsdomain/var/openpanel/modules/DNSDomain.module/verify
 	touch install-stamp
 
 binary-indep: build install

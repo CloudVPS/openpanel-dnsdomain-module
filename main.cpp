@@ -8,7 +8,7 @@
 // section of the OpenPanel website on http://www.openpanel.com/
 
 
-#include <moduleapp.h>
+#include <openpanel-core/moduleapp.h>
 #include "domainModule.h"
 
 #include <grace/file.h>
@@ -677,7 +677,7 @@ void domainModule::handleaxfr (const string &cmd, const statstring &id)
 	
 	if (! data.count()) data["127.0.0.1"] = true;
 	
-	f.openwrite ("/var/opencore/conf/staging/DNSDomain/axfr.conf");
+	f.openwrite ("/var/openpanel/conf/staging/DNSDomain/axfr.conf");
 
     f.writeln ("###############################################################################\n");
     f.writeln ("## WARNING: AUTOMATICALLY GENERATED                                          ##\n");
