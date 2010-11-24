@@ -237,14 +237,10 @@ void domainModule::sendGetConfig (void)
 	httpsocket hs;
 	
 	string defaddr = "192.168.1.1";
-	string ipqjson = hs.get ("http://ipinfodb.com/ip_query.php?output=json");
-	value ipq;
-	ipq.fromjson (ipqjson);
-	if (ipq.exists ("Ip"))
-	{
-		defaddr = ipq["Ip"];
-	}
-	
+	string ipqhtml = hs.get ("http://ipinfodb.com/index.php");
+	ipqhtml.cropafter ("<li>IP address : <strong>");
+	ipqhtml.cropat ("</strong>");
+	if (ipqhtml.strlen() && (ipqhtml.strlen() < 18)) defaddr = ipqhtml;
 	value theaddr = $("address", defaddr);
 	
 	dnsdom = $("DNSDomain:Master",
