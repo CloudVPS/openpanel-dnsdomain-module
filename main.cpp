@@ -419,7 +419,7 @@ bool domainModule::write_zonefile 	(const string &filename,
 			if (sname.strlen() < 30);
 				sname.pad (30, ' ');
 
-			f.writeln ("%s IN A            %s" %format (sname, v["address"]));
+			f.writeln ("%s IN AAAA         %s" %format (sname, v["address"]));
 		}
 		
 		f.writeln ("");
