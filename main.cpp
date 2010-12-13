@@ -54,7 +54,7 @@ int domainModule::main (void)
 	if (data["OpenCORE:Context"] == "System:AXFR")
 	{
 		handleaxfr (data["OpenCORE:Command"],
-					data["OpenCORE:Session"]["objectid"]);
+					data["System:AXFR"]["metaid"]);
 					
 		return 0;
 	}
