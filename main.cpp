@@ -654,6 +654,8 @@ void domainModule::handleaxfr (const string &cmd, const statstring &id)
 			{
 				ln.cropafterlast ('\t');
 				ln.cropat (';');
+				if (ln.strncmp ("acl ", 4) == 0) continue;
+				if (ln == "}") continue;
 				data[ln] = true;
 			}
 		}
