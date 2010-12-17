@@ -312,22 +312,26 @@ enum ttl
 # AUTHD
 # ============================================================================
 authd fileops
-	match *.zone			: /var/named/openpanel
-							< user root
-							< group root
-							< perms 0644
-	match *.slavezone		: /var/named/openpanel
-							< user root
-							< group root
-							< perms 0644
-	match zones.conf		: /var/named/openpanel
-							< user root
-							< group root
-							< perms 0644
-	match axfr.conf			: /var/named/openpanel
-							< user root
-							< group root
-							< perms 0644
+	match *.zone				: /var/named/openpanel
+								< user root
+								< group root
+								< perms 0644
+	match *.slavezone			: /var/named/openpanel
+								< user root
+								< group root
+								< perms 0644
+	match zones.conf			: /var/named/openpanel
+								< user root
+								< group root
+								< perms 0644
+	match axfr.conf				: /var/named/openpanel
+								< user root
+								< group root
+								< perms 0644
+	match named.conf.options	: /etc/bind
+								< user root
+								< group root
+								< perms 0644
 
 authd services
 	service %%SERVICENAME%%
