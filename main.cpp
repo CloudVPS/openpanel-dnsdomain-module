@@ -712,7 +712,7 @@ void domainModule::handleaxfr (const string &cmd, const statstring &id)
 	foreach (d, data)
 	{
 		if (d.id() == "127.0.0.1") continue;
-		f.writeln ("\t\t%s;" %format (d.id());
+		f.writeln ("\t\t%s;" %format (d.id()));
 	}
 	f.writeln ("\t};");
 	f.writeln ("};");
