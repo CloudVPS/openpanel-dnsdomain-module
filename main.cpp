@@ -718,13 +718,13 @@ void domainModule::handleaxfr (const string &cmd, const statstring &id)
 	f.writeln ("};");
 	f.close ();
 	
-	if (authd.installfile ("axfr.conf", "/etc/bind"))
+	if (authd.installfile ("axfr.conf", "/var/named/openpanel"))
 	{
 		sendresult (moderr::err_writefile, "Error installing axfr.conf file");
 		return;
 	}
 	
-	if (authd.installfile ("named.conf.options"))
+	if (authd.installfile ("named.conf.options", "/etc/bind"))
 	{
 		sendresult (moderr::err_writefile, "Error installing named.conf.options file");
 		return;
