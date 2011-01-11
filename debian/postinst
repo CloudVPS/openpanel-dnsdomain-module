@@ -70,7 +70,6 @@ _EOF_
 	        };
 _EOF_
         fi
-	    invoke-rc.d openpanel-core reload
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
