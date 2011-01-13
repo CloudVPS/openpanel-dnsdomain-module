@@ -16,7 +16,6 @@
 #include <grace/http.h>
 #include <grace/pcre.h>
 
-
 APPOBJECT(domainModule);
 
 //  =========================================================================
@@ -312,7 +311,8 @@ bool domainModule::write_zonefile 	(const string &filename,
 									 const string &context,
 									 const string &domainname)
 {
-	int nextserial = 1;
+	timestamp ts = kernel.time.now();
+	int nextserial = ts.format("%Y%m%d%H").toint();
 	
 	if ( fs.exists(filename) )
 	{
@@ -324,7 +324,11 @@ bool domainModule::write_zonefile 	(const string &filename,
 		value regexresult;
 		if( serialfinder.match( existingzone, regexresult ) )
 		{
-			nextserial = regexresult[0].ival() + 1;
+			int zoneserial = regexresult[0].ival();
+			if (zoneserial >= nextserial )
+			{
+				nextserial = zoneserial + 1;
+			}
 		}
 	}
 	
