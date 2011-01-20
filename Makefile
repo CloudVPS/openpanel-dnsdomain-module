@@ -25,6 +25,15 @@ dnsdomainmodule.exe: $(OBJ) module.xml
 	$(LD) $(LDFLAGS) -o dnsdomainmodule.exe $(OBJ) $(LIBS) \
 	/usr/lib/openpanel-core/libcoremodule.a
 
+install:
+	mkdir -p ${DESTDIR}/var/openpanel/modules/DNSDomain.module
+	mkdir -p ${DESTDIR}/var/openpanel/conf/staging/DNSDomain
+	cp -rf ./dnsdomainmodule.app    ${DESTDIR}/var/openpanel/modules/DNSDomain.module/
+	ln -sf dnsdomainmodule.app/exec ${DESTDIR}/var/openpanel/modules/DNSDomain.module/action
+	cp     module.xml          ${DESTDIR}/var/openpanel/modules/DNSDomain.module/module.xml
+	install -m 755 verify      ${DESTDIR}/var/openpanel/modules/DNSDomain.module/verify
+	cp *.html techsupport.* ${DESTDIR}/var/openpanel/modules/DNSDomain.module
+
 clean:
 	rm -f *.o *.exe
 	rm -rf dnsdomainmodule.app
