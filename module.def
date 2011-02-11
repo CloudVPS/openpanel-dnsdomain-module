@@ -145,11 +145,11 @@ class DNSDomain:A			< uuid 844c8562-33ec-4204-a0f2-c6321de052d6
 	
 	string name				: Record name
 							< example www
-							< flags enabled visible
+							< flags enabled visible required
 	
 	string address			: Address
 							< regexp [:ipv4:]
-							< flags enabled
+							< flags enabled required
 							< textwidth 16
 
 # ----------------------------------------------------------------------------
