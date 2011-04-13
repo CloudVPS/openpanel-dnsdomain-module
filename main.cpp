@@ -320,7 +320,7 @@ bool domainModule::write_zonefile 	(const string &filename,
 		string existingzone = fs.load (filename);
 		
         static pcregexp serialfinder("\n([0-9]+)\t; Serial\n");
-	
+		
 		value regexresult;
 		if( serialfinder.match( existingzone, regexresult ) )
 		{

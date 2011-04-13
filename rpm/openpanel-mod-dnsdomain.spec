@@ -1,84 +1,58 @@
-# This file is part of OpenPanel - The Open Source Control Panel
-# OpenPanel is free software: you can redistribute it and/or modify it 
-# under the terms of the GNU General Public License as published by the Free 
-# Software Foundation, using version 3 of the License.
-#
-# Please note that use of the OpenPanel trademark may be subject to additional 
-# restrictions. For more information, please visit the Legal Information 
-# section of the OpenPanel website on http://www.openpanel.com/
+%define 	modname	DNSDomain
 
-%define version 0.9.5
-
-%define libpath /usr/lib
-%ifarch x86_64
-  %define libpath /usr/lib64
-%endif
-
-Summary: Bind 9 administration
-Name: openpanel-mod-dnsdomain
-Version: %version
-Release: 1
-License: GPLv2
-Group: Development
-Source: http://packages.openpanel.com/archive/openpanel-mod-dnsdomain-%{version}.tar.gz
-Patch1: openpanel-mod-dnsdomain-00-makefile
-BuildRoot: /var/tmp/%{name}-buildroot
-Requires: openpanel-core >= 0.8.3
-Requires: openpanel-mod-domain
-Requires: caching-nameserver
+Name: 		openpanel-mod-dnsdomain
+Version: 	1.0.3
+Release: 	1%{?dist}
+Summary:  	OpenPanel module to manage DNS and domains
+License: 	GPLv3
+Group: 		Applications/Internet
+Source: 	%{name}-%{version}.tar.bz2
+Requires:	openpanel-core
+Requires: 	bind >= 9.3
+BuildRequires:	openpanel-core-devel
+BuildRequires:	grace-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
-Bind 9 administration
-Configure the BIND 9 DNS server through openpanel
+OpenPanel module to manage DNS and domains
 
 %prep
-%setup -q -n openpanel-mod-dnsdomain-%version
-%patch1 -p0 -b .buildroot
+%setup -q -n %{modname}.module
+./configure --prefix=%{_prefix} --exec-prefix=%{_bindir} \
+            --lib-prefix=%{_libdir} --conf-prefix=%{_sysconfdir} \
+	    --include-prefix=%{_includedir}
 
 %build
-BUILD_ROOT=$RPM_BUILD_ROOT
-./configure
 make
 
 %install
-BUILD_ROOT=$RPM_BUILD_ROOT
-rm -rf ${BUILD_ROOT}
-mkdir -p ${BUILD_ROOT}/var/openpanel/modules/DNSDomain.module
-cp -rf ./dnsdomainmodule.app ${BUILD_ROOT}/var/openpanel/modules/DNSDomain.module/
-ln -sf dnsdomainmodule.app/exec ${BUILD_ROOT}/var/openpanel/modules/DNSDomain.module/action
-cp module.xml techsupport.* *.html ${BUILD_ROOT}/var/openpanel/modules/DNSDomain.module/
-install -m 755 verify ${BUILD_ROOT}/var/openpanel/modules/DNSDomain.module/verify
+rm -rf %{buildroot}
+%makeinstall DESTDIR=%{buildroot}
 
-%post
-NAMEDCONF=/etc/named.conf
-mkdir -p /var/openpanel/conf/staging/DNSDomain
-mkdir -p /var/named/openpanel
-mkdir -p /var/named/openpanel/slaves
-chown named:named /var/named/openpanel/slaves
-chown openpanel-core:openpanel-authd /var/openpanel/conf/staging/DNSDomain
-OPENPANEL_TAG="// {{{openpanel.includes"
-if grep -q "$OPENPANEL_TAG" "$NAMEDCONF"; then
-        echo -n ""
-else
-cat >> "$NAMEDCONF" << _EOF_
-// Do not touch the following lines, these are recognized by the openpanel
-// dnsdomain package on configure
-// {{{openpanel.includes
-include "/var/named/openpanel/zones.conf";
-// }}}
-_EOF_
-echo "// Openpanel initial setup" >> /var/named/openpanel/zones.conf
-service named restart >/dev/null 2>&1
-chkconfig --level 2345 named on
-fi
-if [ ! -f /var/named/openpanel/axfr.conf ]; then
-cat > /var/named/openpanel/axfr.conf << _EOF_
-acl openpanel-axfr {
-	127.0.0.1;
-};
-_EOF_
-fi
+%clean
+rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-/
+%dir %attr(-,openpanel-core, openpanel-authd) %{_localstatedir}/openpanel/conf/staging/%{modname}
+%attr(-,openpanel-core, openpanel-authd) %{_localstatedir}/openpanel/modules/%{modname}.module
+
+%post
+/sbin/service openpaneld condrestart /dev/null 2>&1
+
+%preun
+if [ $1 = 0 ]; then
+	service openpaneld stop >/dev/null 2>&1
+fi
+
+%postun
+if [ $1 = 0 ]; then
+	service openpaneld start >/dev/null 2>&1
+fi
+if [ "$1" = "1" ]; then
+	service openpaneld condrestart >/dev/null 2>&1
+fi
+
+%changelog
+* Wed Jan 18 2011 Igmar Palsenberg <igmar@palsenberg.com>
+- Initial packaging
