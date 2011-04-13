@@ -319,8 +319,8 @@ bool domainModule::write_zonefile 	(const string &filename,
 		// Determine the serial number for the existing zone file
 		string existingzone = fs.load (filename);
 		
-		static pcregexp serialfinder("/^(\\d+)\t; Serial$/");
-		
+        static pcregexp serialfinder("\n([0-9]+)\t; Serial\n");
+	
 		value regexresult;
 		if( serialfinder.match( existingzone, regexresult ) )
 		{
