@@ -2,12 +2,12 @@ Source: openpanel-mod-dnsdomain
 Section: misc
 Priority: optional
 Maintainer: OpenPanel packager <packages@openpanel.com>
-Build-Depends: debhelper (>= 5), libgrace-dev, libgrace-pcre-dev, openpanel-dev
+Build-Depends: debhelper (>= 5), libgrace-dev (>= 1.0), libgrace-pcre-dev (>= 1.0), openpanel-dev (>= 1.1)
 Standards-Version: 3.7.2
 
 Package: openpanel-mod-dnsdomain
 Architecture: any
 Pre-Depends: openpanel-core, openpanel-authd, bind9
-Depends: openpanel-core (>= 0.8.3), openpanel-mod-domain, bind9, libgrace-pcre, ${shlibs:Depends}, ${misc:Depends}
+Depends: openpanel-core (>= 1.1), openpanel-mod-domain (>= 1.1), bind9, ${shlibs:Depends}, ${misc:Depends}
 Description: OpenPanel module to manage Bind 9
  Configure the BIND 9 DNS server through openpanel
