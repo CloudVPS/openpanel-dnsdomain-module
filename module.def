@@ -275,7 +275,7 @@ class DNSDomain:TXT			< uuid 1dd06c1f-268b-4638-8446-df7af1f745fb
 							< flags enabled visible
 	
 	string address			: Value
-							< regexp [:names:]
+							< regexp [:dnstxt:]
 							< flags enabled
 							< textwidth 24
 
