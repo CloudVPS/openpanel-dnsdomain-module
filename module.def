@@ -146,6 +146,7 @@ class DNSDomain:A			< uuid 844c8562-33ec-4204-a0f2-c6321de052d6
 	string name				: Record name
 							< example www
 							< flags enabled visible
+							< regexp ^[-a-z0-9]*$
 	
 	string address			: Address
 							< regexp [:ipv4:]
@@ -171,6 +172,7 @@ class DNSDomain:AAAA		< uuid a8d4117c-eaf7-4f64-9810-de0dda3934f3
 	string name				: Record name
 							< example www
 							< flags enabled visible
+							< regexp ^[-a-z0-9]*$
 	
 	string address			: Address
 							< regexp [:ipv6:]
@@ -195,6 +197,7 @@ class DNSDomain:CNAME		< uuid d6f9ae8e-2eaa-4946-8fe7-cb82c3a1033c
 
 	string name				: Record name
 							< example www
+							< regexp ^[-a-z0-9]*$
 							< flags enabled visible
 							
 	string address			: Address
@@ -220,6 +223,7 @@ class DNSDomain:MX			< uuid 63cfb180-3217-4b6c-9080-1967bb15eccb
 
 	string name				: Record name
 							< example www
+							< regexp ^[-a-z0-9]*$
 							< flags enabled visible
 
 	integer mxpref			: MX Preference
@@ -247,6 +251,7 @@ class DNSDomain:NS			< uuid 005f8d68-63c2-4188-9067-5da1f521bf78
 
 	string name				: Record name
 							< example www
+							< regexp ^[-a-z0-9]*$
 							< flags enabled visible
 							
 	string address			: Address
@@ -272,6 +277,7 @@ class DNSDomain:TXT			< uuid 1dd06c1f-268b-4638-8446-df7af1f745fb
 	
 	string name				: Record name
 							< example www
+							< regexp ^[-a-z0-9]*$
 							< flags enabled visible
 	
 	string address			: Value
